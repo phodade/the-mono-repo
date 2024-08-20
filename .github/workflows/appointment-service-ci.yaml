@@ -5,6 +5,7 @@ on:
     paths:
       - hospital-management/appointment-service/**
 
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
