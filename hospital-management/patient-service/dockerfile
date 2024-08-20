@@ -9,5 +9,3 @@ COPY . /app
 
 # Start the application
 CMD ["java", "-jar","patient-service.jar"]
-
-
