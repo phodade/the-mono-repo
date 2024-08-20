@@ -40,10 +40,8 @@ jobs:
           cd hospital-management/case-service
           mvn org.owasp:dependency-check-maven:check
 
-      - name: Build code and create docker image
-        run: |
-          cd hospital-management/case-service
-          mvn clean install docker:build
+      - name: Build code and create docker images
+        run: mvn clean install docker:build -Dimage.registry=${{secrets.CONTAINER_REGISTRY_URL}} -Dimage.tag=$GITHUB_REF_NAME
 
       - name: List Docker images
         run: docker images
@@ -58,4 +56,4 @@ jobs:
         run: docker tag dnyanyog.org/case-service:latest ${{ secrets.DOCKER_REGISTRY_USER }}/case-service:latest
 
       - name: Push Docker Image for case-service
-        run: docker push ${{ secrets.DOCKER_REGISTRY_USER }}/case-service:latest
+        run: docker push ${{ secrets.DOCKER_REGISTRY_USER }}/case-service:$GITHUB_REF_NAME
