@@ -19,7 +19,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           
-      - name: Perform google formatter check
+      - name: Perform Google Formatter Check
         run: mvn com.spotify.fmt:fmt-maven-plugin:check
         working-directory: hospital-management/hospital-console-fxml
         continue-on-error: true
@@ -32,23 +32,21 @@ jobs:
         continue-on-error: true
 
       - name: OWASP Scan
-        if: false
+        if: ${{ secrets.OWASP_SCAN_ENABLED == 'true' }}
         run: mvn org.owasp:dependency-check-maven:check
 
-      - name: Build code and create docker image
+      - name: Build Code and Create Docker Image
         run: |
           cd hospital-management/hospital-console-fxml
           mvn clean install docker:build
-        
-      - name: List Docker Images
-        run: docker images
 
-      - name: Log in to GitHub Docker Registry
+      - name: Log in to Docker Registry
         uses: docker/login-action@v2
         with:
-          username: ${{secrets.DOCKER_REGISTRY_USER}}
-          password: ${{secrets.DOCKER_REGISTRY_PAT}}
+          username: ${{ secrets.DOCKER_REGISTRY_USER }}
+          password: ${{ secrets.DOCKER_REGISTRY_PAT }}
 
-      - name: Push docker images
+      - name: Push Docker Image
         run: |
-          docker push ${{secrets.DOCKER_REGISTRY_USER}}/hospital-console:latest
+          docker tag hospital-console:latest ${{ secrets.DOCKER_REGISTRY_USER }}/hospital-console:latest
+          docker push ${{ secrets.DOCKER_REGISTRY_USER }}/hospital-console:latest
