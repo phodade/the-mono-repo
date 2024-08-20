@@ -43,8 +43,8 @@ jobs:
       - name: Build code and create docker images
         run: mvn clean install docker:build -Dimage.registry=${{secrets.CONTAINER_REGISTRY_URL}} -Dimage.tag=$GITHUB_REF_NAME
         
-      - name: Re-tag the Docker Image
-        run: docker tag ${{ secrets.CONTAINER_REGISTRY_URL }}/case-service:latest ${{ secrets.DOCKER_REGISTRY_USER }}/case-service:latest
+      - name: Re-tag the docker image
+        run: docker tag dnyanyog.org/case-service:latest ${{secrets.DOCKER_REGISTRY_USER}}/case-service:latest
 
 
       - name: Log in to Docker Hub
@@ -55,4 +55,4 @@ jobs:
 
     
       - name: Push Docker Image for case-service
-        run: docker push ${{ secrets.DOCKER_REGISTRY_USER }}/case-service:latest
+        run: docker push ${{ secrets.DOCKER_REGISTRY_USER }}/case-service:$GITHUB_REF_NAME
