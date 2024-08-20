@@ -42,7 +42,7 @@ jobs:
       - name: Build code and create docker images
         run: |
           cd hospital-management/patient-service
-          mvn clean install docker:build -Dimage.registry=${{secrets.CONTAINER_REGISTRY_URL}} -Dimage.tag=latest
+          mvn clean install docker:build -Dimage.registry=${{secrets.CONTAINER_REGISTRY_URL}} -Dimage.tag=$GITHUB_REF_NAME
 
       - name: List Docker images
         run: docker images  # Add this step to check the image was built and tagged correctly
@@ -54,4 +54,4 @@ jobs:
           password: ${{ secrets.DOCKER_REGISTRY_PAT }}
 
       - name: Push Docker Image
-        run: docker push ${{ secrets.CONTAINER_REGISTRY_URL }}/patient-service:latest
+        run: docker push ${{ secrets.DOCKER_REGISTRY_USER  }}/patient-service:$GITHUB_REF_NAME
