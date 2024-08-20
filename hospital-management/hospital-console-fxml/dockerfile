@@ -11,4 +11,3 @@ COPY . /app
 CMD ["java", "-jar", "hospital-console.jar"]
 
 
-
