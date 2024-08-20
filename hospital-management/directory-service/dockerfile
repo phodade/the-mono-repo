@@ -11,3 +11,4 @@ COPY . /app
 # Start the application
 CMD ["java", "-jar","directory-service.jar"]
 
+
