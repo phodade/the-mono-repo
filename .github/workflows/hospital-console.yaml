@@ -22,3 +22,4 @@ jobs:
       - name: Build code
         working-directory: hospital-management/hospital-console-fxml
         run: mvn clean install
+
