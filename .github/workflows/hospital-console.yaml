@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - hospital-management/**
+
  
 jobs:
   build-and-push:
