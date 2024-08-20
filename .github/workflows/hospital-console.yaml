@@ -1,4 +1,3 @@
-
 name: Build hospital-console image
 
 on:
@@ -24,7 +23,6 @@ jobs:
         run: mvn com.spotify.fmt:fmt-maven-plugin:check
         working-directory: hospital-management/hospital-console-fxml
         continue-on-error: true
-
 
       - name: GitLeaks Scan
         uses: zricethezav/gitleaks-action@v1.3.0
@@ -53,7 +51,4 @@ jobs:
 
       - name: Push docker images
         run: |
-         docker push ${{secrets.DOCKER_REGISTRY_USER}}/hospital-console:latest
-         
-         
-         
+          docker push ${{secrets.DOCKER_REGISTRY_USER}}/hospital-console:latest
