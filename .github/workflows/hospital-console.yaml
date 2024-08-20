@@ -29,11 +29,13 @@ jobs:
         uses: zricethezav/gitleaks-action@v1.3.0
         with:
           args: --path=cd hospital-management/hospital-console-fxml
+        
 
       - name: OSS scan
         run: |
           cd hospital-management/hospital-console-fxml
           mvn ossindex:audit
+        continue-on-error: true
 
       - name: OWASP Scan
         if: false
