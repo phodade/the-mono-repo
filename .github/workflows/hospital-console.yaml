@@ -4,10 +4,10 @@ name: Build hospital-console Image
 on:
   push:
     paths:
-      - hospital-management/**
+      - hospital-management/hospital-console-fxml/**
 
 jobs:
-  build-and-push-hospital-console:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
