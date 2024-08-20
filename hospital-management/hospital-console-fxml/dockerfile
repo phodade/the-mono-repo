@@ -9,4 +9,3 @@ COPY . /app
 
 # Start the application
 CMD ["java", "-jar", "hospital-console.jar"]
-
