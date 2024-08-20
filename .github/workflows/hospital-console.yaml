@@ -1,10 +1,10 @@
 
-name: Build hospital-console Images
+name: Build hospital-console Image
 
 on:
   push:
     paths:
-      - hospital-management/hospital-console-fxml/**
+      - hospital-management/**
 
 jobs:
   build-and-push-hospital-console:
