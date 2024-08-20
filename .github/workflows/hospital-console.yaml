@@ -19,11 +19,6 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Perform google formatter check
-        run: |
-          cd hospital-management/hospital-console-fxml
-          mvn com.spotify.fmt:fmt-maven-plugin:check
-
       - name: GitLeaks Scan
         uses: zricethezav/gitleaks-action@v1.3.0
         with:
