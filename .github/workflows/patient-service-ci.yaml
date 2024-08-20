@@ -52,4 +52,6 @@ jobs:
 
       - name: Push Docker Image
         run: docker push ${{ secrets.CONTAINER_REGISTRY_URL }}/patient-service:$GITHUB_REF_NAME
+
+        
         
