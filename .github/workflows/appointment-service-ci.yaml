@@ -3,7 +3,7 @@ name: Build appointment-service image
 on: 
   push:
     paths:
-      - hospital-management/**
+      - hospital-management/appointment-service/**
 
 jobs:
   build-and-push:
