@@ -12,5 +12,3 @@ COPY . /app
 CMD ["java", "-jar","directory-service.jar"]
 
 
-
-
