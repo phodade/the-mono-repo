@@ -1,4 +1,3 @@
-
 name: Build patient-service image
 
 on:
@@ -20,37 +19,40 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Perform google formatter check
-        run: mvn com.spotify.fmt:fmt-maven-plugin:format
+      - name: Perform Google formatter check
+        run: |
+          cd hospital-management/patient-service
+          mvn com.spotify.fmt:fmt-maven-plugin:format
 
       - name: GitLeaks Scan
         uses: zricethezav/gitleaks-action@v1.3.0
 
       - name: OSS Scan
-        run: mvn ossindex:audit
+        run: |
+          cd hospital-management/patient-service
+          mvn ossindex:audit
         continue-on-error: true
 
       - name: OWASP Scan
         if: false
-        run: mvn org.owasp:dependency-check-maven:check
+        run: |
+          cd hospital-management/patient-service
+          mvn org.owasp:dependency-check-maven:check
 
       - name: Build code and create docker image
         run: |
           cd hospital-management/patient-service
-          mvn clean install docker:build
-        
+          mvn clean install
+          docker build -t ${{ secrets.DOCKER_REGISTRY_USER }}/patient-service:latest .
+
       - name: List Docker Images
         run: docker images
 
-      - name: Log in to GitHub Docker Registry
+      - name: Log in to Docker Registry
         uses: docker/login-action@v2
         with:
-          username: ${{secrets.DOCKER_REGISTRY_USER}}
-          password: ${{secrets.DOCKER_REGISTRY_PAT}}
+          username: ${{ secrets.DOCKER_REGISTRY_USER }}
+          password: ${{ secrets.DOCKER_REGISTRY_PAT }}
 
-      - name: Push docker images
-        run: |
-          docker push ${{secrets.DOCKER_REGISTRY_USER}}//patient-service:latest
-         
-         
-         
+      - name: Push Docker Image
+        run: docker push ${{ secrets.DOCKER_REGISTRY_USER }}/patient-service:latest
