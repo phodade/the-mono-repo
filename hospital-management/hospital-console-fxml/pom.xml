@@ -145,7 +145,7 @@
             <plugin>
                 <groupId>org.sonatype.ossindex.maven</groupId>
                 <artifactId>ossindex-maven-plugin</artifactId>
-                <version>1.6.0</version> <!-- Updated version -->
+                <version>1.5.0</version> <!-- Fallback version -->
                 <configuration>
                     <reportFile>${project.build.directory}/audit-report.json</reportFile>
                     <fail>false</fail>
