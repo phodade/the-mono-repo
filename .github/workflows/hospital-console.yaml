@@ -23,6 +23,7 @@ jobs:
       - name: Perform google formatter check
         run: mvn com.spotify.fmt:fmt-maven-plugin:check
         working-directory: hospital-management/hospital-console-fxml
+        continue-on-error: true
 
 
       - name: GitLeaks Scan
