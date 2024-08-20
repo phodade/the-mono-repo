@@ -56,3 +56,4 @@ jobs:
 
       - name: Push Docker Image
         run: docker push ${{ secrets.DOCKER_REGISTRY_USER }}/patient-service:latest
+        
