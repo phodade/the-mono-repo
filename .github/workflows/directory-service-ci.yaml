@@ -56,7 +56,7 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker push ${{ secrets.DOCKER_REGISTRY_USER }}/directory-servicer:${{ github.ref_name }}
+          docker push ${{ secrets.DOCKER_REGISTRY_USER }}/directory-service:${{ github.ref_name }}
 
       - name: License finder
         run: |
