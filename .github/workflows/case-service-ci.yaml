@@ -1,4 +1,4 @@
-name: Build Case Service
+name: Build Case-Service image
 
 on:
   push:
@@ -19,24 +19,24 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Perform Google formatter check
+      - name: Perform google formatter check
         run: mvn com.spotify.fmt:fmt-maven-plugin:check
         working-directory: hospital-management/case-service
 
       - name: GitLeaks Scan
-        uses: zricethezav/gitleaks-action@v1.3.0
-
-      - name: OSS Scan
-        run: mvn ossindex:audit
-        continue-on-error: true
+        run: |
+          cd hospital-management/case-service
+          docker pull pratikshahodade123/gitleaks
+          docker run -v "$(pwd):/scan" pratikshahodade123/gitleaks
 
       - name: OWASP Scan
         if: false
         run: mvn org.owasp:dependency-check-maven:check
 
-      - name: Build code and create docker images
-        run: mvn clean install docker:build -Dimage.registry=${{secrets.CONTAINER_REGISTRY_URL}} -Dimage.tag=$GITHUB_REF_NAME
-        working-directory: hospital-management/case-service
+      - name: Build code and create docker image
+        run: |
+          cd hospital-management/case-service
+          mvn clean install docker:build -Dimage.registry=${{ secrets.DOCKER_REGISTRY_USER }} -Dimage.tag=${{ github.ref_name }}
         
       - name: Log in to GitHub Docker Registry
         uses: docker/login-action@v2
@@ -44,5 +44,16 @@ jobs:
           username: ${{ secrets.DOCKER_REGISTRY_USER }}
           password: ${{ secrets.DOCKER_REGISTRY_PAT }}
 
-      - name: Push docker images
-        run: docker push ${{secrets.CONTAINER_REGISTRY_URL}}/case-service:$GITHUB_REF_NAME
+      - name: Push Docker Image
+        run: 
+          docker push ${{secrets.DOCKER_REGISTRY_USER}}/case-service:${{ github.ref_name }}
+
+      - name: License finder
+        run: |
+          cd hospital-management/case-service
+          docker pull pratikshahodade123/license-finder
+          docker run -v "$(pwd):/scan" pratikshahodade123/license-finder
+        continue-on-error: true
+ 
+         
+         
