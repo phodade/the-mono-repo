@@ -21,12 +21,12 @@ jobs:
 
       - name: Perform Google formatter check
         run: |
-          cd hospital-management/directory-service-hospital
+          cd hospital-management/directory-service
           mvn com.spotify.fmt:fmt-maven-plugin:check
 
       - name: GitLeaks Scan
         run: |
-          cd hospital-management/directory-service-hospital
+          cd hospital-management/directory-service
           docker pull pratikshahodade123/gitleaks
           docker run -v "$(pwd):/scan" pratikshahodade123/gitleaks
 
@@ -55,7 +55,7 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker push ${{ secrets.DOCKER_REGISTRY_USER }}/directoryser:${{ github.ref_name }}
+          docker push ${{ secrets.DOCKER_REGISTRY_USER }}/directory-servicer:${{ github.ref_name }}
 
       - name: License finder
         run: |
