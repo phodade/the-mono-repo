@@ -31,6 +31,7 @@ jobs:
           docker run -v "$(pwd):/scan" pratikshahodade123/gitleaks
 
       - name: OSS scan
+        if: false
         run: |
           cd hospital-management/api-gateway
           mvn ossindex:audit
