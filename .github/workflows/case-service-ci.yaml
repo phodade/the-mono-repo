@@ -5,6 +5,7 @@ on:
     paths:
       - hospital-management/case-service/**
 
+      
 jobs:
   build-and-push-case-service:
     runs-on: ubuntu-latest
