@@ -55,7 +55,7 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker push ${{ secrets.DOCKER_REGISTRY_USER }}/api-gateway-hospital:${{ github.ref_name }}
+          docker push ${{ secrets.DOCKER_REGISTRY_USER }}/api-gateway:${{ github.ref_name }}
 
       - name: License finder
         run: |
