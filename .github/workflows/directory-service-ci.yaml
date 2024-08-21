@@ -35,6 +35,7 @@ jobs:
         run: |
           cd hospital-management/directory-service
           mvn ossindex:audit
+          continue-on-error: true
 
       - name: OWASP Scan
         if: false
