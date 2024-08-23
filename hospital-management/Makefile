@@ -24,6 +24,7 @@ status:
 		(cd $$project && git status); \
 	done
 
+
 # Pull the latest changes for all projects
 pull:
 	@echo "Fetching the latest changes from remote repositories..."
