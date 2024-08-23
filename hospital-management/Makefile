@@ -3,6 +3,7 @@ SERVICES := api-gateway appointment-service case-service directory-service patie
 LIBRARY := hospital-console-fxml
 REPO := https://github.com/phodade/the-mono-repo.git
 
+
 # Main target 
 default: clone status pull stash build_lib build_services build_images push_images
  
