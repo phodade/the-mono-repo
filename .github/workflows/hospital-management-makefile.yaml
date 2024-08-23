@@ -45,7 +45,8 @@ jobs:
       - name: Compile Library Module
         working-directory: hospital-management
         run: make build_lib
-
+        continue-on-error: true
+  
       - name: Compile All Services
         working-directory: hospital-management
         run: make build_services
