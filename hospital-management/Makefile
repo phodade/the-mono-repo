@@ -15,7 +15,6 @@ clone:
 	@echo "Cloning the library project..."
 	@git clone $(REPO) $(LIBRARY)
 
-
 # Display the Git status for all projects
 status:
 	@echo "Checking Git status for each project..."
