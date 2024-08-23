@@ -59,7 +59,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_REGISTRY_USER }}
-          password: ${{ secrets.DOCKER_REGISTRY_PAST }}
+          password: ${{ secrets.DOCKER_REGISTRY_PAT }}
 
       - name: Upload Docker Images
         working-directory: hospital-management
