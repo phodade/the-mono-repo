@@ -67,3 +67,4 @@ push_images:
 		echo "Pushing Docker image for $$service..."; \
 		docker push pratikshahodade123/$$service; \
 	done
+
