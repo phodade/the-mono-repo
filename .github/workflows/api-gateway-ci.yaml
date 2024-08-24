@@ -19,7 +19,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Perform google formatter check
+      - name: Perform Google Formatter Check
         run: |
           cd hospital-management/api-gateway
           mvn com.spotify.fmt:fmt-maven-plugin:check
@@ -30,23 +30,23 @@ jobs:
           docker pull pratikshahodade123/gitleaks
           docker run -v "$(pwd):/scan" pratikshahodade123/gitleaks
 
-      - name: OSS scan
+      - name: OSS Scan
         run: |
           cd hospital-management/api-gateway
           mvn ossindex:audit
         continue-on-error: true
 
-      - name: OWASP Scan
+      - name: OWASP Scan (Disabled)
         if: false
         run: |
           cd hospital-management/api-gateway
           mvn org.owasp:dependency-check-maven:check
 
-      - name: Build code and create docker image
+      - name: Build Code and Create Docker Image
         run: |
           cd hospital-management/api-gateway
-          mvn clean install docker:build -Dimage.registry=${{ secrets.DOCKER_REGISTRY_USER }} -Dimage.tag=${{ github.ref_name }}
-          
+          mvn clean install io.fabric8:docker-maven-plugin:build -Dimage.registry=${{ secrets.DOCKER_REGISTRY_USER }} -Dimage.tag=${{ github.ref_name }}
+
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
@@ -57,9 +57,9 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_REGISTRY_USER }}/api-gateway:${{ github.ref_name }}
 
-      - name: License finder
+      - name: License Finder
         run: |
           cd hospital-management/api-gateway
           docker pull pratikshahodade123/license-finder
           docker run -v "$(pwd):/scan" pratikshahodade123/license-finder
-        continue-on-error: true
+        
