@@ -1,4 +1,4 @@
-name: base-image-build
+name: Build license finder Base Image 
 
 on:
   push: 
