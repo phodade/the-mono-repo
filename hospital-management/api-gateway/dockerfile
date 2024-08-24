@@ -1,4 +1,4 @@
-FROM pratikshahodade123/openjdk-24-jdk-slim
+FROM pratikshahodade123/openjdk-17-jdk-slim
 
 WORKDIR /app      
    
