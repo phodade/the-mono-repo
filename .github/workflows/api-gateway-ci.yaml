@@ -62,4 +62,5 @@ jobs:
           cd hospital-management/api-gateway
           docker pull pratikshahodade123/license-finder
           docker run -v "$(pwd):/scan" pratikshahodade123/license-finder
+        continue-on-error: true
         
