@@ -36,7 +36,7 @@ jobs:
           mvn ossindex:audit
         continue-on-error: true
 
-      - name: OWASP Scan (Disabled)
+      - name: OWASP Scan
         if: false
         run: |
           cd hospital-management/api-gateway
