@@ -1,12 +1,11 @@
 # Variables
 SERVICES := api-gateway appointment-service case-service directory-service patient-service
-LIBRARY := hospital-console-fxml
+LIBRARY := hospital-console
 REPO := https://github.com/phodade/the-mono-repo.git
-
 
 # Main target 
 default: clone status pull stash build_lib build_services build_images push_images
- 
+
 # Clone all services and the JavaFX library project
 clone:
 	@echo "Starting to clone services and the JavaFX library project..."
@@ -23,7 +22,6 @@ status:
 		echo "Status for $$project:"; \
 		(cd $$project && git status); \
 	done
-
 
 # Pull the latest changes for all projects
 pull:
@@ -59,14 +57,13 @@ build_images:
 	@echo "Creating Docker images for all services..."
 	@for service in $(SERVICES); do \
 		echo "Building Docker image for $$service..."; \
-		(cd $$service && docker build -t pratikshahodade123/$$service .); \
+		(cd $$service && docker build -t pratikshahodade123/$$service:latest .); \
 	done
 
-# Push the Docker images to the Docker registry
+# Push Docker images to registry
 push_images:
-	@echo "Uploading Docker images to Docker Hub..."
+	@echo "Pushing Docker images to registry..."
 	@for service in $(SERVICES); do \
 		echo "Pushing Docker image for $$service..."; \
-		docker push pratikshahodade123/$$service; \
+		docker push pratikshahodade123/$$service:latest; \
 	done
-
